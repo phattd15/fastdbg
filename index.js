@@ -33,12 +33,20 @@ app.post('/query', async (req, res) => {
     });
   } catch (err) {
     let result = fs.readFileSync(`out_${id}.txt`, {encoding: 'utf-8'});
+    let negate = result.indexOf("line");
+    if (negate !== -1) {
+      result = result.slice(negate);
+    }
     if (result.length > 0) {
+      fs.unlink(`temp_${id}.txt`);
+      fs.unlink(`out_${id}.txt`);
       res.send({
         success: false,
         logs: result
       });
     } else {
+      fs.unlink(`temp_${id}.txt`);
+      fs.unlink(`out_${id}.txt`);
       res.send({
         success: false,
         logs: "time limit exceeded for evaluation"
