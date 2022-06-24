@@ -26,10 +26,12 @@ app.get('/', (req, res) => {
   })
 })
 
+app.post('/')
+
 app.post('/realtime', (req, res) => {
   console.log(req.body);
   res.send({
-    challenge: "1"
+    challenge: req.body.challenge
   })
 })
 
