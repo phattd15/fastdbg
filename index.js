@@ -20,7 +20,17 @@ const swaggerDocument = require('./swagger.json');
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 app.get('/', (req, res) => {
-  res.send('Hello World!')
+  console.log(req.body);
+  res.send({
+    challenge: "1"
+  })
+})
+
+app.post('/realtime', (req, res) => {
+  console.log(req.body);
+  res.send({
+    challenge: "1"
+  })
 })
 
 app.post('/query', async (req, res) => {
